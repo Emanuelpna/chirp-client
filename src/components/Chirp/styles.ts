@@ -9,6 +9,10 @@ export const ChirpContainer = styled.div`
     background: ${theme.colors.white.color};
     border: 2px solid ${theme.colors.main.color};
 
+    &:not(.thread) {
+      margin: ${theme.spacing.medium} 0;
+    }
+
     &.thread.main {
       border-end-end-radius: 0;
       border-end-start-radius: 0;
@@ -89,9 +93,11 @@ export const ChirpContentContainer = styled.p`
   `}
 `
 
-export const ChirpLikesContainer = styled.div`
+export const ChirpLikesContainer = styled.button`
   ${({ theme }) => css`
-    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     gap: ${theme.spacing.xsmall};
@@ -100,5 +106,14 @@ export const ChirpLikesContainer = styled.div`
     & svg {
       color: ${theme.colors.red.color};
     }
+  `}
+`
+
+export const ChirpViewThread = styled.a`
+  ${({ theme }) => css`
+    display: block;
+    color: ${theme.colors.main.color};
+    margin-top: ${theme.spacing.regular};
+    font-weight: ${theme.font.weight.bold};
   `}
 `

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid'
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/outline'
 
@@ -11,6 +12,7 @@ type ChirpProps = {
   isOnThread?: boolean
   isMainChirp?: boolean
   isLastOnThread?: boolean
+  onLikeChirp?: (chirpId: number) => void
 }
 
 export function Chirp({
@@ -18,8 +20,17 @@ export function Chirp({
   hasRelated = false,
   isOnThread = false,
   isMainChirp = false,
-  isLastOnThread = false
+  isLastOnThread = false,
+  onLikeChirp
 }: ChirpProps) {
+  const [chirpLiked, setChirpLiked] = useState(false)
+
+  const onLikeChirpCallback = () => {
+    onLikeChirp?.(chirp.id)
+
+    setChirpLiked(true)
+  }
+
   if (!chirp) {
     return null
   }
@@ -46,13 +57,20 @@ export function Chirp({
 
       <S.ChirpContentContainer>{chirp.content}</S.ChirpContentContainer>
 
-      <S.ChirpLikesContainer>
-        {/* <HeartIconSolid className="liked" width={20} height={20} /> */}
-        <HeartIconOutline className="unliked" width={20} height={20} />
+      <S.ChirpLikesContainer onClick={onLikeChirpCallback}>
+        {chirpLiked ? (
+          <HeartIconSolid className="liked" width={20} height={20} />
+        ) : (
+          <HeartIconOutline className="unliked" width={20} height={20} />
+        )}
         <span>{chirp.likes}</span>
       </S.ChirpLikesContainer>
 
-      {hasRelated ? <a href={`/chirp/${chirp.id}`}>Ver Thread</a> : null}
+      {hasRelated ? (
+        <S.ChirpViewThread href={`/chirp/${chirp.id}`}>
+          Ver Thread
+        </S.ChirpViewThread>
+      ) : null}
     </S.ChirpContainer>
   )
 }
