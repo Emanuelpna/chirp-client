@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 export const TitleContainer = styled.div`
@@ -13,7 +14,7 @@ export const TitleContainer = styled.div`
   `}
 `
 
-export const TitleBackButton = styled.a`
+export const TitleBackButton = styled(Link)`
   border: none;
   cursor: pointer;
   background: none;
