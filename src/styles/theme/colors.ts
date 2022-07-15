@@ -1,7 +1,7 @@
 const colorsBase = {
-  yellow: '#F4D35E',
-  'yellow-light': 'hsl(47, 87%, 72%)',
-  'yellow-dark': 'hsl(43, 90%, 44%)',
+  'main-green': '#49D49D',
+  'main-green-light': 'hsl(152, 61%, 72%)',
+  'main-green-dark': 'hsl(166, 69%, 29%)',
   red: '#CA2E55',
   green: '#52B788',
   black: '#0F0F0D',
@@ -10,7 +10,7 @@ const colorsBase = {
 
 export const colors = {
   main: {
-    color: colorsBase.yellow,
+    color: colorsBase['main-green'],
     contrast: colorsBase.black
   },
   success: {
