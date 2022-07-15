@@ -8,7 +8,6 @@ import * as S from './styles'
 
 type ChirpProps = {
   chirp: ChirpModel
-  hasRelated?: boolean
   isOnThread?: boolean
   isMainChirp?: boolean
   isLastOnThread?: boolean
@@ -17,7 +16,6 @@ type ChirpProps = {
 
 export function Chirp({
   chirp,
-  hasRelated = false,
   isOnThread = false,
   isMainChirp = false,
   isLastOnThread = false,
@@ -66,11 +64,7 @@ export function Chirp({
         <span>{chirp.likes}</span>
       </S.ChirpLikesContainer>
 
-      {hasRelated ? (
-        <S.ChirpViewThread href={`/chirp/${chirp.id}`}>
-          Ver Thread
-        </S.ChirpViewThread>
-      ) : null}
+      <S.ChirpOpenChirp to={`/chirp/${chirp.id}`}>Abrir Chirp</S.ChirpOpenChirp>
     </S.ChirpContainer>
   )
 }

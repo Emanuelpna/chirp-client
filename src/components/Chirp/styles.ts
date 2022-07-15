@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 export const ChirpContainer = styled.div`
@@ -88,7 +89,8 @@ export const ChirpAuthorUsername = styled.span`
 
 export const ChirpContentContainer = styled.p`
   ${({ theme }) => css`
-    width: 60ch;
+    max-width: 60ch;
+    white-space: pre-wrap;
     padding: ${theme.spacing.medium} 0;
   `}
 `
@@ -109,7 +111,7 @@ export const ChirpLikesContainer = styled.button`
   `}
 `
 
-export const ChirpViewThread = styled.a`
+export const ChirpOpenChirp = styled(Link)`
   ${({ theme }) => css`
     display: block;
     color: ${theme.colors.main.color};
