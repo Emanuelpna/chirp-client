@@ -14,7 +14,9 @@ export default function ChirpPage() {
 
   const chirpId = params.chirpId
 
-  const chirp = useQuery('/chirps', () => getChirpTree(Number(chirpId)))
+  const chirp = useQuery(['/chirps', chirpId], () =>
+    getChirpTree(Number(chirpId))
+  )
 
   const likeChirp = useMutation(
     (chirp: { id: number }) => updateChirpLikeCount(Number(chirp.id)),
@@ -29,13 +31,12 @@ export default function ChirpPage() {
     return null
   }
 
-  const chirpsOnThread = chirp.data.thread
-
-  const replyChirps = chirp.data.replys
+  const replyChirps = chirp.data.replys ?? []
+  const chirpsOnThread = chirp.data.thread ?? []
 
   return (
     <div>
-      <Title as="h2" withBackButton>
+      <Title as="h2" backButton="/">
         Chirp
       </Title>
 
@@ -49,6 +50,8 @@ export default function ChirpPage() {
               likeChirp.mutate({ id: chirp.data.parent.id })
             }
           />
+
+          <Title as="h3">Resposta do Chirp acima</Title>
         </>
       ) : null}
 
@@ -63,7 +66,7 @@ export default function ChirpPage() {
         />
       ))}
 
-      <Title as="h2">Respostas</Title>
+      {replyChirps.length > 0 ? <Title as="h2">Respostas</Title> : null}
 
       {replyChirps.map((chirp) => (
         <Chirp

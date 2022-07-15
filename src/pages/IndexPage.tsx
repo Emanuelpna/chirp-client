@@ -6,7 +6,7 @@ import {
 } from '/@/data/http/chirpRepository'
 
 import { Chirp } from '/@/components/Chirp/Chirp'
-import { Title } from '../components/Title/Title'
+import { Title } from '/@/components/Title/Title'
 
 export default function IndexPage() {
   const chirps = useQuery('/chirps', getAllChirps)
@@ -20,19 +20,16 @@ export default function IndexPage() {
     }
   )
 
-  if (!chirps.data) {
-    return null
-  }
+  const allChirps = chirps.data ?? []
 
   return (
     <div>
       <Title as="h2">Chirp</Title>
 
-      {chirps.data.map((chirp) => (
+      {allChirps.map((chirp) => (
         <Chirp
           chirp={chirp}
           key={chirp.id}
-          hasRelated={chirp.related && chirp.related.length > 0}
           onLikeChirp={() => chirp && likeChirp.mutate({ id: chirp.id })}
         />
       ))}
