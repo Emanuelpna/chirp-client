@@ -18,8 +18,14 @@ type ChirpTreeDTOAPI = {
   thread: ChirpDTO[]
 }
 
-export const getChirpTree = async (chirpId: number): Promise<ChirpTreeAPI> => {
-  const chirp = await http.get<ChirpTreeDTOAPI>('/chirps/tree', { chirpId })
+export const getChirpTree = async (
+  chirpId: number,
+  authorId: number
+): Promise<ChirpTreeAPI> => {
+  const chirp = await http.get<ChirpTreeDTOAPI>('/chirps/tree', {
+    chirpId,
+    authorId
+  })
 
   return {
     parent: chirp.parent ? ChirpBuilder.toChirpModel(chirp.parent) : null,

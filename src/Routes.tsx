@@ -10,10 +10,8 @@ export default function Routes() {
     <ReactRoutes>
       <Route path="/" element={<App />}>
         <Route index element={<IndexPage />} />
-        <Route path="chirp/:chirpId" element={<ChirpPage />}>
-          {/* <Route path=":teamId" element={<Team />} />
-          <Route path="new" element={<NewTeamForm />} />
-          <Route index element={<LeagueStandings />} /> */}
+        <Route path="chirp">
+          <Route path=":authorId/:chirpId" element={<ChirpPage />} />
         </Route>
       </Route>
     </ReactRoutes>

@@ -64,7 +64,9 @@ export function Chirp({
         <span>{chirp.likes}</span>
       </S.ChirpLikesContainer>
 
-      <S.ChirpOpenChirp to={`/chirp/${chirp.id}`}>Abrir Chirp</S.ChirpOpenChirp>
+      <S.ChirpOpenChirp to={`/chirp/${chirp.author.id}/${chirp.id}`}>
+        Abrir Chirp
+      </S.ChirpOpenChirp>
     </S.ChirpContainer>
   )
 }

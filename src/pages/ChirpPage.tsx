@@ -13,9 +13,10 @@ export default function ChirpPage() {
   const params = useParams()
 
   const chirpId = params.chirpId
+  const authorId = params.authorId
 
-  const chirp = useQuery(['/chirps', chirpId], () =>
-    getChirpTree(Number(chirpId))
+  const chirp = useQuery(['/chirps/tree', chirpId, authorId], () =>
+    getChirpTree(Number(chirpId), Number(authorId))
   )
 
   const likeChirp = useMutation(
