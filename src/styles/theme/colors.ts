@@ -5,6 +5,7 @@ const colorsBase = {
   red: '#CA2E55',
   green: '#52B788',
   black: '#0F0F0D',
+  gray: '#4A4A47',
   white: '#EFF7FF'
 } as const
 
@@ -24,6 +25,10 @@ export const colors = {
   text: {
     color: colorsBase.black,
     contrast: colorsBase.white
+  },
+  'text-light': {
+    color: colorsBase.gray,
+    contrast: colorsBase.black
   },
   white: {
     color: '#fff',
