@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/solid'
-import { HeartIcon as HeartIconOutline } from '@heroicons/react/outline'
+import {
+  RefreshIcon,
+  HeartIcon as HeartIconOutline
+} from '@heroicons/react/outline'
 
 import { Chirp as ChirpModel } from '/@/domain/model/Chirp'
 
@@ -11,6 +14,7 @@ type ChirpProps = {
   isOnThread?: boolean
   isMainChirp?: boolean
   isLastOnThread?: boolean
+  onReChirp?: (chirpId: number) => void
   onLikeChirp?: (chirpId: number) => void
 }
 
@@ -19,6 +23,7 @@ export function Chirp({
   isOnThread = false,
   isMainChirp = false,
   isLastOnThread = false,
+  onReChirp,
   onLikeChirp
 }: ChirpProps) {
   const [chirpLiked, setChirpLiked] = useState(false)
@@ -27,6 +32,10 @@ export function Chirp({
     onLikeChirp?.(chirp.id)
 
     setChirpLiked(true)
+  }
+
+  const onReChirpCallback = () => {
+    onReChirp?.(chirp.id)
   }
 
   if (!chirp) {
@@ -40,10 +49,17 @@ export function Chirp({
       }`}
     >
       <S.ChirpAuthorContainer>
+        {chirp.reChirped ? (
+          <S.ChirpAuthorRechirp to={`/user/${chirp.author.id}`}>
+            <RefreshIcon width={20} height={20} /> {chirp.reChirped.author.name}{' '}
+            Rechirpou:
+          </S.ChirpAuthorRechirp>
+        ) : null}
+
         <S.ChirpAuthorAvatar src={chirp.author.avatar} alt="" />
 
         <S.ChirpAuthorNameContainer>
-          <S.ChirpAuthorName href={`/user/${chirp.author.id}`}>
+          <S.ChirpAuthorName to={`/user/${chirp.author.id}`}>
             {chirp.author.name}
           </S.ChirpAuthorName>
 
@@ -55,14 +71,22 @@ export function Chirp({
 
       <S.ChirpContentContainer>{chirp.content}</S.ChirpContentContainer>
 
-      <S.ChirpLikesContainer onClick={onLikeChirpCallback}>
-        {chirpLiked ? (
-          <HeartIconSolid className="liked" width={20} height={20} />
-        ) : (
-          <HeartIconOutline className="unliked" width={20} height={20} />
-        )}
-        <span>{chirp.likes}</span>
-      </S.ChirpLikesContainer>
+      <S.ChirpFooter>
+        <S.ChirpLikesContainer onClick={onLikeChirpCallback}>
+          {chirpLiked ? (
+            <HeartIconSolid className="liked" width={18} height={18} />
+          ) : (
+            <HeartIconOutline className="unliked" width={18} height={18} />
+          )}
+          <span>{chirp.likes}</span>
+        </S.ChirpLikesContainer>
+
+        <S.ChirpRechirpContainer onClick={onReChirpCallback}>
+          <RefreshIcon width={18} height={18} />
+
+          <span>Rechirp</span>
+        </S.ChirpRechirpContainer>
+      </S.ChirpFooter>
 
       <S.ChirpOpenChirp to={`/chirp/${chirp.author.id}/${chirp.id}`}>
         Abrir Chirp

@@ -43,3 +43,22 @@ export const updateChirpLikeCount = async (
 
   return chirp.payload
 }
+
+type RechirpPayloadModel = {
+  likes: number
+  authorId: number
+  parentToId: number
+  published: boolean
+  isRechirp: boolean
+}
+
+export const rechirpChirp = async (
+  reChirp: RechirpPayloadModel
+): Promise<ChirpDTO> => {
+  const chirp = await http.post<{ payload: ChirpDTO }>(
+    '/chirps/rechirp',
+    reChirp
+  )
+
+  return chirp.payload
+}

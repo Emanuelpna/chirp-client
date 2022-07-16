@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
-export const ChirpContainer = styled.div`
+export const ChirpContainer = styled.section`
   ${({ theme }) => css`
     width: 100%;
     padding: ${theme.spacing.regular};
@@ -34,10 +34,28 @@ export const ChirpContainer = styled.div`
   `}
 `
 
-export const ChirpAuthorContainer = styled.div`
+export const ChirpAuthorRechirp = styled(Link)`
   ${({ theme }) => css`
     width: 100%;
     display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: ${theme.spacing.regular};
+    gap: calc(${theme.spacing.xsmall} / 2);
+    color: ${theme.colors['text-light'].color};
+    transition: all 150ms ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  `}
+`
+
+export const ChirpAuthorContainer = styled.header`
+  ${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
     gap: ${theme.spacing.small};
   `}
 `
@@ -60,7 +78,7 @@ export const ChirpAuthorNameContainer = styled.div`
   `}
 `
 
-export const ChirpAuthorName = styled.a`
+export const ChirpAuthorName = styled(Link)`
   ${({ theme }) => css`
     width: 100%;
     text-decoration: none;
@@ -68,12 +86,10 @@ export const ChirpAuthorName = styled.a`
     font-weight: ${theme.font.weight.bold};
     font-family: ${theme.font.family.display};
     line-height: ${theme.font.lineHeight.small};
-    margin-bottom: -2px;
-    border-bottom: 2px solid transparent;
-    transition: border 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
 
     &:hover {
-      border-bottom: 2px solid ${theme.colors.text.color};
+      text-decoration: underline;
     }
   `}
 `
@@ -95,6 +111,18 @@ export const ChirpContentContainer = styled.p`
   `}
 `
 
+export const ChirpFooter = styled.footer`
+  ${({ theme }) => css`
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: ${theme.spacing.regular};
+    padding: ${theme.spacing.xsmall} 0;
+  `}
+`
+
 export const ChirpLikesContainer = styled.button`
   ${({ theme }) => css`
     border: none;
@@ -111,11 +139,28 @@ export const ChirpLikesContainer = styled.button`
   `}
 `
 
+export const ChirpRechirpContainer = styled.button`
+  ${({ theme }) => css`
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: ${theme.spacing.xsmall};
+    color: ${theme.colors.text.color};
+    line-height: ${theme.font.lineHeight.small};
+
+    & svg {
+      color: ${theme.colors.text.color};
+    }
+  `}
+`
+
 export const ChirpOpenChirp = styled(Link)`
   ${({ theme }) => css`
     display: block;
     color: ${theme.colors.main.color};
-    margin-top: ${theme.spacing.regular};
+    margin-top: ${theme.spacing.small};
     font-weight: ${theme.font.weight.bold};
   `}
 `

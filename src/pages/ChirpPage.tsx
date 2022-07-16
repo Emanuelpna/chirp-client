@@ -3,6 +3,7 @@ import { useMutation, useQuery } from 'react-query'
 
 import {
   getChirpTree,
+  rechirpChirp,
   updateChirpLikeCount
 } from '/@/data/http/chirpRepository'
 
@@ -21,6 +22,22 @@ export default function ChirpPage() {
 
   const likeChirp = useMutation(
     (chirp: { id: number }) => updateChirpLikeCount(Number(chirp.id)),
+    {
+      onSuccess: () => {
+        chirp.refetch()
+      }
+    }
+  )
+
+  const rechirp = useMutation(
+    (chirp: { author: number; id: number }) =>
+      rechirpChirp({
+        likes: 0,
+        isRechirp: true,
+        published: true,
+        parentToId: chirp.id,
+        authorId: chirp.author
+      }),
     {
       onSuccess: () => {
         chirp.refetch()
@@ -50,6 +67,14 @@ export default function ChirpPage() {
               chirp.data.parent &&
               likeChirp.mutate({ id: chirp.data.parent.id })
             }
+            onReChirp={() =>
+              chirp.data.parent &&
+              chirp &&
+              rechirp.mutate({
+                id: chirp.data.parent.id,
+                author: chirp.data.parent.author.id
+              })
+            }
           />
 
           <Title as="h3">Resposta do Chirp acima</Title>
@@ -64,6 +89,9 @@ export default function ChirpPage() {
           isMainChirp={index === 0}
           isLastOnThread={index === chirpsOnThread.length - 1}
           onLikeChirp={() => chirp && likeChirp.mutate({ id: chirp.id })}
+          onReChirp={() =>
+            chirp && rechirp.mutate({ author: chirp.author.id, id: chirp.id })
+          }
         />
       ))}
 
@@ -74,6 +102,9 @@ export default function ChirpPage() {
           key={chirp.id}
           chirp={chirp}
           onLikeChirp={() => chirp && likeChirp.mutate({ id: chirp.id })}
+          onReChirp={() =>
+            chirp && rechirp.mutate({ author: chirp.author.id, id: chirp.id })
+          }
         />
       ))}
     </div>

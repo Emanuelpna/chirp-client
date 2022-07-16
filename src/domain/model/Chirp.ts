@@ -12,6 +12,7 @@ export type Chirp = {
   content: string | null
   scheduledTo: Date | null
   parentToId: number | null
+  reChirped?: Chirp
 }
 
 export type ChirpTree = Chirp & {

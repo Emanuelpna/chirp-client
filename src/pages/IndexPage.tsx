@@ -2,6 +2,7 @@ import { useMutation, useQuery } from 'react-query'
 
 import {
   getAllChirps,
+  rechirpChirp,
   updateChirpLikeCount
 } from '/@/data/http/chirpRepository'
 
@@ -20,6 +21,22 @@ export default function IndexPage() {
     }
   )
 
+  const rechirp = useMutation(
+    (chirp: { author: number; id: number }) =>
+      rechirpChirp({
+        likes: 0,
+        isRechirp: true,
+        published: true,
+        parentToId: chirp.id,
+        authorId: chirp.author
+      }),
+    {
+      onSuccess: () => {
+        chirps.refetch()
+      }
+    }
+  )
+
   const allChirps = chirps.data ?? []
 
   return (
@@ -31,6 +48,9 @@ export default function IndexPage() {
           chirp={chirp}
           key={chirp.id}
           onLikeChirp={() => chirp && likeChirp.mutate({ id: chirp.id })}
+          onReChirp={() =>
+            chirp && rechirp.mutate({ author: chirp.author.id, id: chirp.id })
+          }
         />
       ))}
     </div>

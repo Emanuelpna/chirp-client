@@ -12,6 +12,14 @@ export const http = {
 
     return response.data
   },
+  post: async <DataModel>(
+    endpoint: string,
+    payload?: Record<string, unknown>
+  ) => {
+    const response = await api.post<DataModel>(endpoint, payload)
+
+    return response.data
+  },
   put: async <DataModel>(
     endpoint: string,
     payload?: Record<string, unknown>
