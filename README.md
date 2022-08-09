@@ -1,15 +1,24 @@
-# Vite + React + Typescript + Prettier + Eslint + Jest + React Testing Library + Husky + Commitzen
+# Chirp Client
 
-Template for scaffolding a React + Typescript project in ViteJS
+A Twitter Clone made based on a [@zanfranceschi challenge](https://dev.to/zanfranceschi/desafio-modelagem-de-bd-do-twitter-402b) to model the Twitter database with threads, recursive replies, retweets, etc
 
-## Get Started
+I expanded the concept to create the whole backend and not only the database for training purposes
 
-- Clone the repo
-- Install Dependencies - `npm i`
-- Prepare Husky git hooks - `npm run prepare`
-- Start Dev Server - `npm run dev`
+## Techs
 
-## Building
+- Typescript
+- ReactJS
+- ViteJS
 
-- Build the project - `npm run build`
-- Preview result - `npm run preview`
+## Features
+
+- Likes
+- Retweets
+- Threads
+- View Tweets replys
+
+## TO DO
+
+- Quote Retweets
+- Replys to tweets
+- Hide empty retweets on replys section of tweets
